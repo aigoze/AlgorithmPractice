@@ -39,6 +39,34 @@ class LinkList{
             newNode->next = Ptmp;
         }
     }
+    
+    void DeleteNodeFromLinkedList(struct ListNode **head, int position){
+        int k = 1;
+        struct ListNode *Ptmp, *Qtmp;
+        if (*head == nullptr) {
+            printf("List is Empty\n");
+            return;
+        }
+        Ptmp = *head;
+        if (position == 1) {
+            *head = (*head)->next;
+            free(Ptmp);
+            return;
+        }else{
+            while ((Ptmp != nullptr) && (k < position)) {
+                Qtmp = Ptmp;
+                Ptmp = Ptmp->next;
+                k++;
+            }
+            if (Ptmp == nullptr) {
+                printf("Position is not exist\n");
+                return;
+            }else{
+                Qtmp->next = Ptmp->next;
+                free(Ptmp);
+            }
+        }
+    }
 
 };
 
