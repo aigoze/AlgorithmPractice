@@ -13,6 +13,12 @@ class LinkList{
         struct ListNode *next;
         int data;
     };
+    struct DLLNode{
+        struct DLLNode *next;
+        struct DLLNode *prev;
+        int data;
+    };
+    
     void InsertLinkList(struct ListNode **head, int data, int position){
         struct ListNode *newNode, *Ptmp, *Qtmp;
         newNode = (struct ListNode*)malloc(sizeof(struct ListNode));//the type is struc ListNode
@@ -66,6 +72,42 @@ class LinkList{
                 free(Ptmp);
             }
         }
+    }
+    
+    void DLLInsert(struct DLLNode **head, int data, int position){
+        int k = 1;
+        struct DLLNode *temp, *newNode;
+        newNode = (struct DLLNode*)malloc(sizeof(struct DLLNode));
+        if (!newNode) {
+            printf("Memory Error\n");
+            return;
+        }
+        newNode->data = data;
+        if (position == 1) {
+            newNode->next = *head;
+            newNode->prev = nullptr;
+            if (*head) {
+                (*head)->prev = newNode;
+                *head = newNode;
+                return;
+            }
+        }
+        temp = *head;
+        while ((k < position) && (temp->next != nullptr)) {
+            k++;
+            temp = temp->next;
+        }
+        if (k != position) {
+            printf("required position does not exists\n");
+            return;
+        }
+        newNode->next = temp->next;
+        newNode->prev = temp;
+        if (temp->next) {
+            temp->next->prev = newNode;
+            temp->next = newNode;
+        }
+        return;
     }
 
 };
