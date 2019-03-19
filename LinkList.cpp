@@ -19,6 +19,11 @@ class LinkList{
         int data;
     };
     
+    struct CLLNode{
+        struct ListNode *next;
+        int data;
+    };
+    
     void InsertLinkList(struct ListNode **head, int data, int position){
         struct ListNode *newNode, *Ptmp, *Qtmp;
         newNode = (struct ListNode*)malloc(sizeof(struct ListNode));//the type is struc ListNode
@@ -109,6 +114,36 @@ class LinkList{
         }
         return;
     }
+    
+    void DLLDelete(struct DLLNode **head, int position){
+        struct DLLNode *temp, *temp2;
+        temp = *head;
+        int k = 1;
+        if (position == 1) {
+            *head = (*head)->next;
+            if ((*head) != nullptr) {
+                (*head)->prev = nullptr;
+            }
+            free(temp);
+            return;
+        }else{
+            while ((k < position) && (temp->next != nullptr)) {
+                temp = temp->next;
+                k++;
+            }
+            if (k != position) {
+                printf("Desired position does not exists!\n");
+                return;
+            }
+            temp2 = temp->prev;
+            temp2->next = temp->next;
+            if (temp->next != nullptr)
+                temp->next->prev = temp2;
+            free(temp);
+            return;
+        }
+    }
 
+    
 };
 
