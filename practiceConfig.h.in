@@ -1,0 +1,3 @@
+// the configured options and settings for Module
+#define practice_VERSION_MAJOR @practice_VERSION_MAJOR@
+#define practice_VERSION_MINOR @practice_VERSION_MINOR@
